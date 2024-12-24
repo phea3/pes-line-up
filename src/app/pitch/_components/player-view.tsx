@@ -33,7 +33,7 @@ export default function PlayerView({ order }: Props) {
             <div className="flex flex-col gap-1 items-center ">
               <Card className="p-1 shadow-none border">
                 <CardHeader className="justify-between">
-                  <div className="flex gap-5">
+                  <div className="flex gap-3">
                     <Badge
                       size="sm"
                       color={load.color}
@@ -67,12 +67,12 @@ export default function PlayerView({ order }: Props) {
                     </Button>
                   </div>
                 </CardHeader>
-                <CardBody className="px-3 py-0 text-small">
+                <CardBody className="px-1 py-0 text-small">
                   <div className="text-sm">Name: {load.name}</div>
                   <div className="text-sm mb-4">Age: {`(${load.age}y)`}</div>
                 </CardBody>
                 <Divider />
-                <CardFooter className="gap-3">
+                <CardFooter className="py-1">
                   <Chip color={load.color} variant="dot" size="sm">
                     <div className="text-sm">{load.positiom}</div>
                   </Chip>
