@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@dnd-kit/core": "^6.3.1",
+    "@dnd-kit/sortable": "^10.0.0",
     "@nextui-org/avatar": "^2.2.4",
     "@nextui-org/react": "^2.6.8",
     "framer-motion": "^11.15.0",
