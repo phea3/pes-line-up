@@ -1,8 +1,9 @@
 "use client";
 
 import React from "react";
-import { Avatar } from "@nextui-org/react";
+import { Avatar, Chip } from "@nextui-org/react";
 import { marsei_players, PlayerType } from "@/constants/marsei-players";
+import { Shirt } from "lucide-react";
 
 //
 // 🧠 1. Split Teams (based on index)
@@ -18,6 +19,7 @@ function build433(team: PlayerType[]) {
     team.filter((p) => p.position === pos).slice(0, count);
 
   return {
+    Bench: [...pick("Bench", 2)],
     GK: pick("GK", 1),
 
     DEF: [...pick("LB", 1), ...pick("CB", 2), ...pick("RB", 1)],
@@ -35,7 +37,11 @@ const formationB = build433(teamB);
 // 🎯 3. Position Map (FIFA style)
 //
 const positionMap = {
-  GK: [{ top: "92%", left: "50%" }],
+  Bench: [
+    { top: "10%", left: "10%" },
+    { top: "10%", left: "25%" },
+  ],
+  GK: [{ top: "90%", left: "50%" }],
 
   DEF: [
     { top: "78%", left: "15%" }, // LB
@@ -45,15 +51,15 @@ const positionMap = {
   ],
 
   MID: [
-    { top: "40%", left: "35%" },
-    { top: "60%", left: "50%" },
-    { top: "45%", left: "65%" },
+    { top: "60%", left: "35%" },
+    { top: "65%", left: "50%" },
+    { top: "60%", left: "65%" },
   ],
 
   FWD: [
-    { top: "25%", left: "20%" },
-    { top: "20%", left: "50%" },
-    { top: "25%", left: "80%" },
+    { top: "40%", left: "20%" },
+    { top: "35%", left: "50%" },
+    { top: "40%", left: "80%" },
   ],
 };
 
@@ -73,18 +79,29 @@ function PlayerNode({
       style={style}
     >
       <div className="relative">
-        <Avatar src={player.img} className="w-16 h-16 border-2 border-white" />
-        <div className="absolute -top-2 -right-2 bg-black text-white text-[10px] px-1 rounded">
+        <Avatar
+          src={player.img}
+          className="w-16 h-16 border-2 border-white"
+          color={player.color}
+        />
+        <Chip
+          className="absolute -top-2 -right-2 text-white text-[10px] px-1 rounded"
+          color={player.color}
+          size="sm"
+        >
           {player.rate}
-        </div>
+        </Chip>
       </div>
 
       <div className="text-white text-xs font-bold text-center mt-1">
         {player.name} ({player.age}y)
       </div>
 
-      <div className="text-white text-[10px] opacity-80">
-        #{player.shirtNumber}
+      <div className="relative opacity-80 flex justify-center items-center mt-2">
+        <Shirt color="white" className="absolute" />
+        <div className="text-white text-[10px] opacity-80 ">
+          {player.shirtNumber}
+        </div>
       </div>
     </div>
   );
@@ -153,6 +170,20 @@ function Pitch({
       <div className="absolute top-0 right-0 w-6 h-6 border-white border-r-2 border-t-2 rounded-tr-full" />
       <div className="absolute bottom-0 left-0 w-6 h-6 border-white border-l-2 border-b-2 rounded-bl-full" />
       <div className="absolute bottom-0 right-0 w-6 h-6 border-white border-r-2 border-b-2 rounded-br-full" />
+
+      {/* Bench */}
+      {formation.Bench.map((p: PlayerType, i: number) => (
+        <PlayerNode
+          key={p.id}
+          player={p}
+          style={{
+            top: flip(positionMap.Bench[i].top),
+            left: positionMap.Bench[i].left,
+            position: "absolute",
+            zIndex: 99999,
+          }}
+        />
+      ))}
 
       {/* GK */}
       {formation.GK.map((p: PlayerType, i: number) => (
