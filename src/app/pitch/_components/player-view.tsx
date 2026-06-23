@@ -24,9 +24,15 @@ function build433(team: PlayerType[]) {
 
     DEF: [...pick("LB", 1), ...pick("CB", 2), ...pick("RB", 1)],
 
-    MID: [...pick("AM", 1), ...pick("DM", 1), ...pick("CM", 1)],
+    // MID: [...pick("AM", 1), ...pick("DM", 1), ...pick("CM", 1)],
+    MID: [...pick("AM", 1), ...pick("CM", 1)],
 
-    FWD: [...pick("LW", 1), ...pick("CF", 1), ...pick("RW", 1)],
+    FWD: [
+      ...pick("LW", 1),
+      ...pick("CF", 1),
+      ...pick("ST", 1),
+      ...pick("RW", 1),
+    ],
   };
 }
 
@@ -41,25 +47,26 @@ const positionMap = {
     { top: "10%", left: "10%" },
     { top: "10%", left: "25%" },
   ],
-  GK: [{ top: "90%", left: "50%" }],
+  GK: [{ top: "88%", left: "50%" }],
 
   DEF: [
-    { top: "78%", left: "15%" }, // LB
-    { top: "80%", left: "35%" }, // CB
-    { top: "80%", left: "65%" }, // CB
-    { top: "78%", left: "85%" }, // RB
+    { top: "75%", left: "12%" }, // LB
+    { top: "78%", left: "33%" }, // CB
+    { top: "78%", left: "68%" }, // CB
+    { top: "75%", left: "88%" }, // RB
   ],
 
   MID: [
-    { top: "60%", left: "35%" },
-    { top: "65%", left: "50%" },
-    { top: "60%", left: "65%" },
+    { top: "50%", left: "35%" },
+    // { top: "65%", left: "50%" },
+    { top: "50%", left: "65%" },
   ],
 
   FWD: [
-    { top: "40%", left: "20%" },
-    { top: "35%", left: "50%" },
-    { top: "40%", left: "80%" },
+    { top: "30%", left: "15%" },
+    { top: "12%", left: "40%" },
+    { top: "15%", left: "60%" },
+    { top: "30%", left: "85%" },
   ],
 };
 
@@ -81,7 +88,7 @@ function PlayerNode({
       <div className="relative">
         <Avatar
           src={player.img}
-          className="w-16 h-16 border-2 border-white"
+          className="w-20 h-20 border-2 border-white"
           color={player.color}
         />
         <Chip
@@ -98,6 +105,14 @@ function PlayerNode({
       </div>
 
       <div className="relative opacity-80 flex justify-center items-center mt-2">
+        <Chip
+          className="absolute -left-9 text-white text-[8px] px-1"
+          color="warning"
+          size="sm"
+          radius="full"
+        >
+          {player.position}
+        </Chip>
         <Shirt color="white" className="absolute" />
         <div className="text-white text-[10px] opacity-80 ">
           {player.shirtNumber}
@@ -172,7 +187,7 @@ function Pitch({
       <div className="absolute bottom-0 right-0 w-6 h-6 border-white border-r-2 border-b-2 rounded-br-full" />
 
       {/* Bench */}
-      {formation.Bench.map((p: PlayerType, i: number) => (
+      {/* {formation.Bench.map((p: PlayerType, i: number) => (
         <PlayerNode
           key={p.id}
           player={p}
@@ -183,7 +198,7 @@ function Pitch({
             zIndex: 99999,
           }}
         />
-      ))}
+      ))} */}
 
       {/* GK */}
       {formation.GK.map((p: PlayerType, i: number) => (
