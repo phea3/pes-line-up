@@ -1,4 +1,10 @@
-import { CalendarDays, FileText, Home, Sparkles } from "lucide-react";
+import {
+  CalendarDays,
+  DollarSign,
+  FileText,
+  Home,
+  Sparkles,
+} from "lucide-react";
 
 export const menus = [
   {
@@ -24,5 +30,11 @@ export const menus = [
     name: "PowerPoint Transition",
     href: "/powerpoint-transition",
     icon: CalendarDays,
+  },
+  {
+    id: 5,
+    name: "Payment Plan",
+    href: "/payment-plan",
+    icon: DollarSign,
   },
 ];
