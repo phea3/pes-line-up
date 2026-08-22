@@ -1,9 +1,9 @@
 import {
   CalendarDays,
-  DollarSign,
   FileText,
   Home,
   Sparkles,
+  PanelLeftDashed,
 } from "lucide-react";
 
 export const menus = [
@@ -33,8 +33,8 @@ export const menus = [
   },
   {
     id: 5,
-    name: "Payment Plan",
-    href: "/payment-plan",
-    icon: DollarSign,
+    name: "Moodle",
+    href: "/moodle",
+    icon: PanelLeftDashed,
   },
 ];
