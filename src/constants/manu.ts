@@ -2,8 +2,8 @@ import {
   CalendarDays,
   FileText,
   Home,
-  Sparkles,
   PanelLeftDashed,
+  Sparkles,
 } from "lucide-react";
 
 export const menus = [
