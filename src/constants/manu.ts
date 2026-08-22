@@ -1,5 +1,6 @@
 import {
   CalendarDays,
+  DollarSign,
   FileText,
   Home,
   PanelLeftDashed,
@@ -33,6 +34,12 @@ export const menus = [
   },
   {
     id: 5,
+    name: "Payment Plan",
+    href: "/payment-plan",
+    icon: DollarSign,
+  },
+  {
+    id: 6,
     name: "Moodle",
     href: "/moodle",
     icon: PanelLeftDashed,
