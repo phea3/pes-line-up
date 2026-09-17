@@ -9,12 +9,6 @@ import axios from "axios";
 
 type EditableField = "name" | "age" | "rate" | "shirtNumber" | "img";
 
-//
-// ---------------------------------------------------------
-// FORMATION
-// ---------------------------------------------------------
-//
-
 // function build433(team: PlayerType[]) {
 //   const pick = (pos: PlayerType["position"], count: number) =>
 //     team.filter((p) => p.position === pos).slice(0, count);
@@ -99,12 +93,6 @@ const positionMap = {
     { top: "25%", left: "75%" }, // CF
   ],
 };
-
-//
-// ---------------------------------------------------------
-// PLAYER NODE
-// ---------------------------------------------------------
-//
 
 function Jersey({ player }: { player: PlayerType }) {
   return (
@@ -217,7 +205,7 @@ function PlayerNode({
       <div className="relative">
         <Avatar
           src={player.img}
-          className="w-16 h-16 border-2 border-white"
+          className="w-20 h-20 border-2 border-white"
           color={player.color}
         />
 
@@ -258,12 +246,6 @@ function PlayerNode({
     </div>
   );
 }
-
-//
-// ---------------------------------------------------------
-// BENCH
-// ---------------------------------------------------------
-//
 
 function Bench({
   players,
@@ -324,12 +306,6 @@ function Bench({
   );
 }
 
-//
-// ---------------------------------------------------------
-// PLAYER EDITOR
-// ---------------------------------------------------------
-//
-
 function PlayerEditor({
   player,
   onSave,
@@ -352,6 +328,12 @@ function PlayerEditor({
         };
       }
 
+      if (field === "img") {
+        return {
+          ...current,
+          img: value,
+        };
+      }
       return {
         ...current,
         [field]: Number(value),
@@ -372,7 +354,7 @@ function PlayerEditor({
 
         <div className="flex flex-col gap-4">
           <Input
-            label="Name"
+            label="Profile Image"
             value={form.img}
             onChange={(e) => updateField("img", e.target.value)}
           />
@@ -461,8 +443,8 @@ function Pitch({
   };
 
   return (
-    <div className="relative w-full max-w-3xl">
-      <div className="relative w-full h-[600px] bg-green-600 rounded-xl overflow-hidden border-4 border-white">
+    <div className="relative w-full max-w-6xl">
+      <div className="relative w-full h-[800px] bg-green-600 rounded-xl overflow-hidden border-4 border-white">
         {/* Grass */}
         <div className="absolute inset-0 bg-green-600">
           <div
@@ -659,7 +641,7 @@ export default function PlayerPitchView() {
   return (
     <div className="flex flex-col lg:flex-row items-start justify-center gap-10 p-6 bg-gray-900 min-h-screen">
       {/* TEAM A */}
-      <div className="w-full max-w-3xl">
+      <div className="w-full max-w-6xl">
         <div className="text-white text-xl font-bold mb-3 text-center">
           Team A
         </div>
@@ -678,7 +660,7 @@ export default function PlayerPitchView() {
       </div>
 
       {/* TEAM B */}
-      <div className="w-full max-w-3xl">
+      <div className="w-full max-w-6xl">
         <div className="text-white text-xl font-bold mb-3 text-center">
           Team B
         </div>
