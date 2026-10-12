@@ -9,29 +9,7 @@ import axios from "axios";
 
 type EditableField = "name" | "age" | "rate" | "shirtNumber" | "img";
 
-// function build433(team: PlayerType[]) {
-//   const pick = (pos: PlayerType["position"], count: number) =>
-//     team.filter((p) => p.position === pos).slice(0, count);
-
-//   return {
-//     Bench: team.filter((p) => p.position === "Bench"),
-
-//     GK: pick("GK", 1),
-
-//     DEF: [...pick("LB", 1), ...pick("CB", 2), ...pick("RB", 1)],
-
-//     MID: [...pick("AM", 1), ...pick("CM", 1)],
-
-//     FWD: [
-//       ...pick("LW", 1),
-//       ...pick("CF", 1),
-//       ...pick("ST", 1),
-//       ...pick("RW", 1),
-//     ],
-//   };
-// }
-
-function build343(team: PlayerType[]) {
+function build433(team: PlayerType[]) {
   const pick = (pos: PlayerType["position"], count: number) =>
     team.filter((p) => p.position === pos).slice(0, count);
 
@@ -40,59 +18,76 @@ function build343(team: PlayerType[]) {
 
     GK: pick("GK", 1),
 
-    DEF: pick("CB", 3),
+    DEF: [...pick("LB", 1), ...pick("CB", 2), ...pick("RB", 1)],
 
-    MID: [...pick("LM", 1), ...pick("CM", 2), ...pick("RM", 1)],
+    MID: [...pick("AM", 1), ...pick("DM", 1), ...pick("CM", 1)],
 
-    FWD: [...pick("CF", 3)],
+    FWD: [...pick("LW", 1), ...pick("CF", 1), ...pick("RW", 1)],
   };
 }
 
-// const positionMap433 = {
-//   GK: [{ top: "88%", left: "50%" }],
+// function build343(team: PlayerType[]) {
+//   const pick = (pos: PlayerType["position"], count: number) =>
+//     team.filter((p) => p.position === pos).slice(0, count);
 
-//   DEF: [
-//     { top: "75%", left: "12%" }, // LB
-//     { top: "78%", left: "33%" }, // CB
-//     { top: "78%", left: "68%" }, // CB
-//     { top: "75%", left: "88%" }, // RB
-//   ],
+//   return {
+//     Bench: team.filter((p) => p.position === "Bench"),
 
-//   MID: [
-//     { top: "50%", left: "35%" },
-//     { top: "50%", left: "65%" },
-//   ],
+//     GK: pick("GK", 1),
 
-//   FWD: [
-//     { top: "30%", left: "15%" },
-//     { top: "12%", left: "40%" },
-//     { top: "15%", left: "60%" },
-//     { top: "30%", left: "85%" },
-//   ],
-// };
+//     DEF: pick("CB", 3),
+
+//     MID: [...pick("LM", 1), ...pick("CM", 2), ...pick("RM", 1)],
+
+//     FWD: [...pick("CF", 3)],
+//   };
+// }
 
 const positionMap = {
-  GK: [{ top: "90%", left: "50%" }],
+  GK: [{ top: "88%", left: "50%" }],
 
   DEF: [
-    { top: "70%", left: "25%" }, // CB
-    { top: "70%", left: "50%" }, // CB
-    { top: "70%", left: "75%" }, // CB
+    { top: "75%", left: "12%" }, // LB
+    { top: "78%", left: "33%" }, // CB
+    { top: "78%", left: "68%" }, // CB
+    { top: "75%", left: "88%" }, // RB
   ],
 
   MID: [
-    { top: "50%", left: "15%" }, // LM
-    { top: "50%", left: "38%" }, // CM
-    { top: "50%", left: "62%" }, // CM
-    { top: "50%", left: "85%" }, // RM
+    { top: "40%", left: "35%" },
+    { top: "60%", left: "50%" },
+    { top: "40%", left: "65%" },
   ],
 
   FWD: [
-    { top: "25%", left: "25%" }, // CF
-    { top: "15%", left: "50%" }, // AM
-    { top: "25%", left: "75%" }, // CF
+    { top: "20%", left: "15%" },
+    { top: "15%", left: "50%" },
+    { top: "20%", left: "85%" },
   ],
 };
+
+// const positionMap343 = {
+//   GK: [{ top: "90%", left: "50%" }],
+
+//   DEF: [
+//     { top: "70%", left: "25%" }, // CB
+//     { top: "70%", left: "50%" }, // CB
+//     { top: "70%", left: "75%" }, // CB
+//   ],
+
+//   MID: [
+//     { top: "50%", left: "15%" }, // LM
+//     { top: "50%", left: "38%" }, // CM
+//     { top: "50%", left: "62%" }, // CM
+//     { top: "50%", left: "85%" }, // RM
+//   ],
+
+//   FWD: [
+//     { top: "25%", left: "25%" }, // CF
+//     { top: "15%", left: "50%" }, // AM
+//     { top: "25%", left: "75%" }, // CF
+//   ],
+// };
 
 function Jersey({ player }: { player: PlayerType }) {
   return (
@@ -433,7 +428,7 @@ function Pitch({
   reverse = false,
   onEdit,
 }: {
-  formation: ReturnType<typeof build343>;
+  formation: ReturnType<typeof build433>;
   reverse?: boolean;
   onEdit: (player: PlayerType) => void;
 }) {
@@ -570,9 +565,9 @@ export default function PlayerPitchView() {
 
   const teamB = useMemo(() => players.filter((p) => p.index === 2), [players]);
 
-  const formationA = useMemo(() => build343(teamA), [teamA]);
+  const formationA = useMemo(() => build433(teamA), [teamA]);
 
-  const formationB = useMemo(() => build343(teamB), [teamB]);
+  const formationB = useMemo(() => build433(teamB), [teamB]);
 
   const deletePlayer = async (id: string) => {
     await fetch(API_URL, {
