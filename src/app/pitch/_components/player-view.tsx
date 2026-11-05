@@ -54,15 +54,15 @@ const positionMap = {
   ],
 
   MID: [
-    { top: "40%", left: "35%" },
-    { top: "60%", left: "50%" },
-    { top: "40%", left: "65%" },
+    { top: "55%", left: "35%" },
+    { top: "35%", left: "50%" },
+    { top: "55%", left: "65%" },
   ],
 
   FWD: [
-    { top: "20%", left: "15%" },
+    { top: "35%", left: "15%" },
     { top: "15%", left: "50%" },
-    { top: "20%", left: "85%" },
+    { top: "35%", left: "85%" },
   ],
 };
 
